@@ -1,9 +1,9 @@
 const express = require('express')
 
+const CompanyController = require('./controllers/companyController')
+
 const routes = express.Router()
 
-routes.get('/users', (req, res) => {
-  return res.json('aqui')
-})
+routes.post('/company', CompanyController.create)
 
 module.exports = routes

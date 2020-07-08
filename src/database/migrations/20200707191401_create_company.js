@@ -5,9 +5,7 @@ exports.up = function(knex) {
     table.string('name').notNullable();
     table.string('email').notNullable();
     
-    table.string('opinion_id').notNullable();
-    table.foreign('opinion_id').references('id').inTable('opinion');  
-
+    
   });
 };
 

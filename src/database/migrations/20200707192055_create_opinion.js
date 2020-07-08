@@ -7,6 +7,8 @@ exports.up = function(knex) {
       table.string('suggestion').notNullable();
       table.string('score').notNullable();
 
+      table.string('company_id').notNullable();
+      table.foreign('company_id').references('id').inTable('company'); 
     });
 };
 
