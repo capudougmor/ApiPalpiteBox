@@ -2,6 +2,8 @@ const express = require('express')
 
 const CompanyController = require('./controllers/CompanyController')
 const OpinionController = require('./controllers/OpinionController')
+const ProfileController = require('./controllers/ProfileController')
+const SessionController = require('./controllers/SessionController')
 
 const routes = express.Router()
 
@@ -10,5 +12,10 @@ routes.get('/company', CompanyController.index)
 
 routes.post('/opinion', OpinionController.create)
 routes.get('/opinion', OpinionController.index)
+routes.delete('/opinion/:id', OpinionController.delete)
+
+routes.get('/profile', ProfileController.index)
+
+routes.post('/session', SessionController.create)
 
 module.exports = routes
