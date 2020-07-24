@@ -9,10 +9,9 @@ module.exports = {
 
   async create(req, res) {
     const { name, email, whatsapp, suggestion, score } = req.body
-    const company_id = req.headers.authorization
     
     const [ id ] = await connection('opinion').insert({
-      name, email, whatsapp, suggestion, score, company_id
+      name, email, whatsapp, suggestion, score
     })
     
     return res.json({ id })

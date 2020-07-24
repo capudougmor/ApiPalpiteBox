@@ -6,9 +6,7 @@ exports.up = function(knex) {
       table.string('whatsapp').notNullable();
       table.string('suggestion').notNullable();
       table.decimal('score').notNullable();
-
-      table.string('company_id').notNullable();
-      table.foreign('company_id').references('id').inTable('company'); 
+      
     });
 };
 
