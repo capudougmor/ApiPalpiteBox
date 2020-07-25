@@ -1,4 +1,5 @@
 const connection = require('../database/connection')
+const crypto = require('crypto')
 
 module.exports = {
   async index(req, res) {
@@ -8,13 +9,15 @@ module.exports = {
   },
 
   async create(req, res) {
-    const { name, email, whatsapp, suggestion, score } = req.body
+    const { name, email, whatsapp, suggestion, score, companyName } = req.body
+
+    const cuponKey = crypto.randomBytes(4).toString('HEX');
     
-    const [ id ] = await connection('opinion').insert({
-      name, email, whatsapp, suggestion, score
+    await connection('opinion').insert({
+      name, email, whatsapp, suggestion, score, companyName, cuponKey
     })
     
-    return res.json({ id })
+    return res.json({ cuponKey })
   },
   
   async delete(req, res) {
