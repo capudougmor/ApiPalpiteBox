@@ -7,18 +7,20 @@ module.exports = {
 
     const company = await connection('company')
       .where('email', email)
-      .select('name')
+      .select('*')
       .first()
 
-      if (!company) {
-        return res.status(400).json({error: 'E-mail no exist'})
+      if(company != undefined) {        
+          const correct = bcrypt.compareSync(password, company.password)
+          
+          if(correct) {
+            return res.json(company)
+          } else {
+            return res.status(401).json({ error: 'Senha incorreta!'});
+          }
+
       } else {
-        const correct = bcrypt.compareSync(password, company.password)
-        if(correct) {
-          return res.json(company)
-        } else {
-          return res.status(401).json({ error: 'Senha incorreta!'});
-        }
+        return res.status(400).json({error: 'E-mail no exist'})
       }
   }
 }

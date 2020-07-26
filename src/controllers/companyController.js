@@ -31,14 +31,14 @@ module.exports = {
 
   async delete(req, res) { 
     const { id } = req.params;    // pega o id dentro do req.params
-    const company_id = req.headers.authorization; // tambem busca o id da company logada
+    const company_id = req.headers.authorization; 
     
-    const company = await connection('company') // verificar se e a mesma do caso
+    const company = await connection('company') 
         .where('id', id)
-        .select('company_id')
+        .select('id')
         .first()
 
-    if (company.company_id != company_id) { // verifica o id da 
+    if (id != company_id) {
         return res.status(401).json({ error: 'Operetion not permitted.'});
     }
 

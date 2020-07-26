@@ -9,13 +9,14 @@ const routes = express.Router()
 
 routes.post('/company', CompanyController.create)
 routes.get('/company', CompanyController.index)
-routes.delete('/company', CompanyController.delete)
+routes.delete('/company/:id', CompanyController.delete)
 
 routes.post('/opinion', OpinionController.create)
 routes.get('/opinion', OpinionController.index)
 routes.delete('/opinion/:id', OpinionController.delete)
 
 routes.get('/profile', ProfileController.index)
+routes.put('/profile', ProfileController.update)
 
 routes.post('/session', SessionController.create)
 
