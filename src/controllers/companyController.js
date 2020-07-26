@@ -1,4 +1,5 @@
 const connection = require('../database/connection')
+const bcrypt = require('bcryptjs')
 const crypto = require('crypto')
 
 module.exports = {
@@ -11,16 +12,21 @@ module.exports = {
   async create(req, res) { 
     const { name, email, password } = req.body;
 
+    const salt =bcrypt.genSaltSync(10)
+    const hash = bcrypt.hashSync(password, salt)
+
     const id = crypto.randomBytes(4).toString('HEX'); 
 
     await connection('company').insert({
         id,
         name,
         email,
-        password
+        password: hash
+    }).then(() => {
+      return res.json({ id });
+    }).catch((err) => {
+      return res.status(401).json(err)
     })
-
-    return res.json({ id });
   },
 
   async delete(req, res) { 
