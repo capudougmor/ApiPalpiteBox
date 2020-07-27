@@ -17,6 +17,7 @@ routes.delete('/opinion/:id', OpinionController.delete)
 
 routes.get('/profile', ProfileController.index)
 routes.put('/profile', ProfileController.update)
+routes.get('/showCupon/:name', ProfileController.showCupon)
 
 routes.post('/session', SessionController.create)
 
