@@ -31,8 +31,9 @@ module.exports = {
   async update(req, res, next) {
     try {
       const id = req.headers.authorization
-      const { msgCkecked, msgCupon } = req.body
+      let { msgCkecked, msgCupon } = req.body   
       
+      console.log(msgCupon, msgCkecked)
       const company = await connection('company')
         .where('id', id)
         .update( {msgCkecked, msgCupon } )
