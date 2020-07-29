@@ -11,7 +11,7 @@ module.exports = {
   async create(req, res) {
     const { name, email, whatsapp, suggestion, score, companyName } = req.body
 
-    const cuponKey = crypto.randomBytes(4).toString('HEX');
+    const cuponKey = crypto.randomBytes(4).toString('HEX').toUpperCase();
     
     await connection('opinion').insert({
       name, email, whatsapp, suggestion, score, companyName, cuponKey
