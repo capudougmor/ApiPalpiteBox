@@ -15,12 +15,17 @@ module.exports = {
     try {
       const companyName = req.params.name
       
-      const msgCupon = await connection('company')
+      const msgCompany = await connection('company')
         .where('name', companyName)
         .select('*')
-  
-      return res.json(msgCupon)
 
+      const data = {
+        msgCupon: msgCompany[0].msgCupon,
+        msgCkecked: msgCompany[0].msgCkecked
+      }
+
+      
+      return res.json(data)
 
     } catch(err) {
       next(err)
