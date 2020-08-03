@@ -22,19 +22,15 @@ module.exports = {
   
   async delete(req, res) {
     const { id } = req.params
-    const company_id = req.headers.authorization
+    const companyName = req.headers.authorization
     
     const opinion = await connection('opinion')
       .where('id', id)
-      .select('company_id')
+      .select('*')
       .first()
 
-      if (opinion.company_id !== company_id) {
+      if (opinion.companyName !== companyName) {
         return res.status(401).json({ error: 'Operation not permitted.'})
-      }
-
-      if (opinion.id !== 'id') {
-        return res.status(401).json({ error: 'There is no Opinion.'})
       }
 
       await connection('opinion').where('id', id).delete()
